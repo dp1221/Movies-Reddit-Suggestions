@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang=‘en’>
+	<head>
+		<title> Movie Recommender </title>
+		<style>
+		.tablea {
+			border: 1px solid; width ="100%";height="100%";font-size: 50px;
+		}
+
+		.imagea {
+			width="5px" height ="5px";
+		}
+
+		</style>
+		
+	</head>
+	<body>
+		<h1> MOVIE RECOMMENDER </h1>
+		<form method=‘get’>
+			<input name="q" type ="text">
+			<input type="submit" value="search"><br>
+			<iframe width="560" height="315" 
+				src="https://www.youtube.com/embed/TcMBFSGVi1c" 
+				title="YouTube video player" frameborder="0" 
+				allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+			</iframe>
+		<table class="tablea"> 
+			<tr class = "tablea">
+				<th class="tablea">
+					93% 		<img width="100px" height="70px" src="https://www.thewrap.com/wp-content/uploads/2018/08/RottenTomatoes.jpg"/>
+ </strong>
+				</th>
+				<th class = "tablea">
+					<strong> the summary</strong>
+				</th>
+			</tr>
+		</table>
+		<ul>
+			{% for row in rows %}
+        		<li>{{row[0]}}</li>
+        	{% endfor %}
+        </ul>
+		
+	</body>
+</html>
+
+
