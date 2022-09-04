@@ -8,6 +8,8 @@ from spacy.tokens import DocBin
 import json
 from flask import Flask,render_template,request
 import sqlite3
+from googleapiclient.discovery import build
+from private_youtube_key import api_key
 
 
 nlp=spacy.blank("en")
@@ -57,7 +59,13 @@ def main(name):
     update_db()
     call_movie(name) 
 
-
+def youtube_parser(q):
+    youtube=build('youtube','v3',developerKey=api_key)
+    request=youtube.search().list(
+    part='snippet',
+    maxResults=1,
+    q=f'{q} Trailer')
+    return request.execute()
 
 app=Flask(__name__, template_folder='template')
 
@@ -71,8 +79,17 @@ def submission():
     if not name:
         return "failure"
     main(name)
-    rows=conn.execute("SELECT DISTINCT name, COUNT(name) FROM movies GROUP BY name ORDER BY COUNT(name) DESC  limit 20;")
-    return render_template("index.html",rows=rows)
+
+    movies_temp=[]
+    rows=conn.execute("SELECT DISTINCT name, COUNT(name) FROM movies GROUP BY name ORDER BY COUNT(name) DESC  limit 5;")
+
+    for row in rows:
+        movie_json=youtube_parser(row[0])
+        video_id='https://www.youtube.com/watch?v='+str(movie_json['items'][0]['id']['videoId'])
+        video_thumbnail_url=movie_json['items'][0]['snippet']['thumbnails']['medium']['url']
+        movies_temp.append([row[0],video_id,video_thumbnail_url])
+
+    return render_template("index.html",movies_temp=movies_temp)
 
 app.run()
 
