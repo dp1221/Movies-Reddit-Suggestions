@@ -1,5 +1,3 @@
-NOTE: The libraries used have been deprecated, this application no longer works on Windows (the system I am using). 
-
 # Movies-Reddit-Suggestions
 Movie recommendations are a relevant topic for many digital consumers. However, despite the advanced algorithms used in Google, sometimes individuals turn to discussion forums for suggestions. This experiment creates a crude program of querying the Reddit discussion forum for similar movies, then using Spacy to parse through the results to compare its effectiveness qualitatively to Google results. This produced an output requiring further filtration. Proving generally effective, this underscores the potency of this method’s application in other less incentivized domains. Future developement encouraged!
 Despite the Google algorithms used to return similar movie titles, individuals sometimes turn to discussion forums to find new movies that are similar, especially the “MovieSuggestions” subreddit on Reddit. The Reddit API does not allow querying comments, which are often where the suggestions by users are posted. Because of this, the Pushshift.io API wrapper (PSAW) was used as it provides the parameters for all searches needed for querying Reddit for keyword from 2017 onward [3].
@@ -18,6 +16,7 @@ Create a website with a friendly interface for anyone to run the program and get
 Perhaps with the returned movie titles provide other relevant information such as the plot synopsis, trailer, rotten tomatoes score, etc. 
 Also train piplines to recognize other languages so that diverse films can be shown to the user.
 
+NOTE: The libraries used have been deprecated, this application no longer works on Windows (the system I am using). 
 
 
 
